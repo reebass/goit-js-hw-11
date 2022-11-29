@@ -1,5 +1,7 @@
 import {ImageApiService} from "./api";
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
+import SimpleLightbox from 'simplelightbox';
+import "simplelightbox/dist/simple-lightbox.min.css";
 
 
 const refs = {
@@ -9,6 +11,11 @@ const refs = {
 }
 
 
+let lightBoxGallery = new SimpleLightbox('.gallery a', {
+  captionsData: 'alt',
+  captionPosition: 'bottom',
+  captionDelay: 250,
+});
 
 
 
@@ -50,6 +57,7 @@ async function fetchImages() {
   }
   createMarkupGallery(imagesFetchObject.hits)
   refs.btnLoadMore.style.display = "block";
+  lightBoxGallery.refresh()
 
   if(drawnImages >= imagesFetchObject.totalHits){
     refs.btnLoadMore.style.display = "none";
@@ -65,10 +73,10 @@ async function fetchImages() {
 
 function createMarkupGallery(images) {
 
-  const createPageGallery = images.map(({webformatURL, tags, likes, views, comments, downloads}) => 
+  const createPageGallery = images.map(({webformatURL, largeImageURL, tags, likes, views, comments, downloads}) => 
     `<li class="gallery-item">
     <div class="img-wrap">
-    <img class="gallery-img" src="${webformatURL}" alt="${tags}">
+    <a href="${largeImageURL}"><img class="gallery-img" src="${webformatURL}" alt="${tags}"></a>
     </div>
     <ul class="stats-wrap">
       <li><span class="stats-tittle">Likes:</span><span class="stats">${likes}</span></li>
