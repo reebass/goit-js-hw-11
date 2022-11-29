@@ -24,7 +24,7 @@ async fetchApi() {
         //     this.incrimentPage()
         //     return data.hits
         try {
-        const response = await axios.get(`${BASE_URL}?key=${API_KEY}&q=${this.searchQuery}&page=${this.page}&per_page=100`, options);
+        const response = await axios.get(`${BASE_URL}?key=${API_KEY}&q=${this.searchQuery}&page=${this.page}&per_page=40`, options);
         this.incrimentPage()
         return response.data
     } catch(error){
