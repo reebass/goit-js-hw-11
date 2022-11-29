@@ -10,7 +10,7 @@ export class ImageApiService {
         this.page = 1;
     }
 
-    async fetchApi() {
+async fetchApi() {
         const API_KEY = '31630114-541891e344088f225cf30f54b';
         const BASE_URL = 'https://pixabay.com/api/';
 
@@ -19,17 +19,17 @@ export class ImageApiService {
                 orientation: 'horizontal',
                 safesearch: 'true',
             }
-        // fetch(`${BASE_URL}?key=${API_KEY}&q=${this.searchQuery}&page=${this.page}`, options)
+        // return fetch(`${BASE_URL}?key=${API_KEY}&q=${this.searchQuery}&page=${this.page}`, options)
         // .then(resp => resp.json())
         // .then(data => {
-        //     console.log(data)
-        //     this.page += 1;
-        // })
-
+        //     this.incrimentPage()
+        //     return data.hits
         const response = await axios.get(`${BASE_URL}?key=${API_KEY}&q=${this.searchQuery}&page=${this.page}`, options);
         this.incrimentPage()
-        return response.data
-    }
+        return response.data.hits
+}
+
+    
     incrimentPage() {
         this.page += 1;
     }
