@@ -1,6 +1,5 @@
 import axios from "axios";
 
-// https://pixabay.com/api/?key=31630114-541891e344088f225cf30f54b&q=cat&image_type=photo&orientation=horizontal&safesearch=true
 
 
 
@@ -24,9 +23,13 @@ async fetchApi() {
         // .then(data => {
         //     this.incrimentPage()
         //     return data.hits
-        const response = await axios.get(`${BASE_URL}?key=${API_KEY}&q=${this.searchQuery}&page=${this.page}`, options);
+        try {
+        const response = await axios.get(`${BASE_URL}?key=${API_KEY}&q=${this.searchQuery}&page=${this.page}&per_page=100`, options);
         this.incrimentPage()
-        return response.data.hits
+        return response.data
+    } catch(error){
+        console.log(error)
+    }
 }
 
     

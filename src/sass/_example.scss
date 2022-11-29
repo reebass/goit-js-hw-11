@@ -1,14 +1,15 @@
 .search-form {
-    position: absolute;
-    top: 0;
-    left: 0;
     background-color: rgb(35, 93, 168);
     width: 100vw;
     height: 50px;
 
+    margin-bottom: 40px;
+
     display: flex;
     align-items: center;
     justify-content: center;
+
+
 
     & > input {
         outline: none;
@@ -57,9 +58,76 @@
     
 }
 
+.gallery {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-around;
+    gap: 15px;
+
+    list-style: none;
+    margin: 0 auto 30px auto;
+    padding: 0 20px;
+
+    &-item {
+        flex-basis: calc((100% - 45px) / 4);
+        border: 1px solid rgba(0, 0, 0, 0.342);
+        box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.12), 0px 1px 1px rgba(0, 0, 0, 0.14), 0px 2px 1px rgba(0, 0, 0, 0.2);
+        border-radius: 0px 0px 4px 4px;
+    }
+
+    &-img {
+        display: block;
+        width: 100%;
+        height: 100%;
+
+        object-fit: cover;
+        object-position: center;
+
+
+    }
+}
+
+.img-wrap {
+    width: 100%;
+    height: 200px;
+}
+
+
+.stats-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+
+    list-style: none;
+    padding: 10px;
+    
+    & > li {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
+        gap: 5px;
+
+        flex-basis: calc((100% - 30px) / 4);
+    }
+}
+
+.stats-tittle {
+    font-size: 12px;
+    line-height: calc(18 / 15);
+    text-transform: uppercase;
+    font-weight: 500;
+}
+
+
+
+
+
 .js-load-more {
-    display: block;
-    margin: 0 auto;
+    display: none;
+    margin: 0 auto 100px auto;
     padding: 0;
 
     
