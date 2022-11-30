@@ -20,17 +20,22 @@ let lightBoxGallery = new SimpleLightbox('.gallery a', {
 
 
 const imageApi = new ImageApiService();
-
+let drawnImages = 0;
 
 refs.form.addEventListener('submit', onSearch);
 refs.btnLoadMore.addEventListener('click', onLoadMore)
 
 function onSearch(evt) {
   evt.preventDefault();
+  drawnImages = 0
   refs.btnLoadMore.style.display = "none";
   imageApi.searchQuery = evt.currentTarget.elements.searchQuery.value.trim();
+  if(!imageApi.searchQuery) {
+    return Notify.info("Please enter your request.");
+  }
   clearGallery();
   imageApi.resetPage();
+  
 
   
   fetchImages();  
@@ -41,15 +46,15 @@ function onLoadMore() {
   fetchImages()
 }
 
-let drawnImages = 0;
+
 async function fetchImages() {
   try{
   const imagesFetchObject = await imageApi.fetchApi()
   drawnImages += imagesFetchObject.hits.length
   
 
-  if(!imagesFetchObject.hits.length || !imageApi.searchQuery) {
-    return Notify.info('Sorry, there are no images matching your search query. Please try again.')
+  if(!imagesFetchObject.hits.length) {
+    return Notify.info(`Sorry, there are no images matching your ${imageApi.searchQuery}. Please try again.`)
   }
   
   if(imageApi.page <= 2 ) {
